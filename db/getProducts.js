@@ -18,10 +18,10 @@ const getProductos = async (limits = 10, order_by = 'id_ASC', page = 1) => {
     }
 
     switch (dir) {
-        case 'ASC':
+        case 'DESC':
             break;
         default:
-            dir = 'DESC';
+            dir = 'ASC';
     }
 
     if (limits > 50) limits = 50;
@@ -55,9 +55,23 @@ const getProductos = async (limits = 10, order_by = 'id_ASC', page = 1) => {
         const { total, ...obj } = entry;
         return obj;
     });
+
+    let next = null;
+    let previous = null;
+
+    if (Math.ceil(total / limits) < page) {
+        next = `/productos?page=${page + 1}&limits=${limits}`;
+    }
+
+    if (page > 1) {
+        previous = `/products?page=${page - 1}&limits=${limits}`;
+    }
+
     return {
         pagina: page,
         productosPorPagina: limits,
+        previous: previous,
+        next, next,
         total: total,
         productos: products,
     };

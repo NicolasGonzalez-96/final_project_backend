@@ -14,18 +14,6 @@ const registerHandler = async (req, res) => {
     }
 };
 
-const getUserDataHandler = async (req, res) => {
-    try {
-        const { accessToken } = req.cookies;
-        const user = verifyAccessToken(accessToken);
-        res.status(200).send(user);
-    } catch (err) {
-        console.log(err);
-        res.send(err.code || 500).send({ message: err.message || 'algo salió mal' });
-    }
-
-};
-
 const getTransactionsByUserHandler = async (req, res) => {
     try {
         const { accessToken } = req.cookies;
@@ -56,7 +44,6 @@ const processTransactionHandler = async (req, res) => {
 
 module.exports = {
     registerHandler,
-    getUserDataHandler,
     getTransactionsByUserHandler,
     processTransactionHandler,
 };

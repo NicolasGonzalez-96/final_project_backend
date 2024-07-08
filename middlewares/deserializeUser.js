@@ -9,10 +9,12 @@ const deserializeUser = (req, _, next) => {
 
     const { payload, expiredAT } = verifyAccessToken(accessToken);
 
-    if (!expiredAT) {
+    if (expiredAT) {
         const { expiredRT } = verifyRefreshToken(refreshToken);
         req.user = !expiredRT ? payload : null;
     };
+
+    req.user = payload;
 
     next();
 };

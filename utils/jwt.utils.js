@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { validateSession } = require('../db/validateSession');
 
 const jwt = require('jsonwebtoken');
 

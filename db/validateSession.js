@@ -7,3 +7,5 @@ const validateSession = async (sessionId) => {
         isValid: isValid,
     }
 };
+
+module.exports = { validateSession };
